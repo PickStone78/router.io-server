@@ -4,7 +4,7 @@
   "description": "The server for exchanging messages",
   "author": "PickStone78@163.com",
   "license": "MIT",
-  "main": "./lib/router.js"
+  "main": "./lib/router.js",
   "dependencies": {
     "body-parser": "1.15.2",
     "express": "4.14.0"

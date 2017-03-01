@@ -8,40 +8,42 @@ app.use(express.static('public'));
 
 app.post('/publish', function (request, response) {
   var exchange = request.body.exchange;
-  var ret = router.publish(exchange);
-  if (ret.error == undefined) {
-    response.status(200).send(ret);
+  try {
+    var ret = router.publish(exchange);
+    response.status(200).send({channel: ret});
+  } catch (error) {
+    response.status(500).send(error);
   }
 });
 
 app.post('/subscribe', function (request, response) {
   var exchange = request.body.exchange;
-  var ret = router.subscribe(exchange);
-  if (ret.error == undefined) {
-    response.status(200).send(ret);
-  } else {
-    response.status(500).send(ret);
+  try {
+    var ret = router.subscribe(exchange);
+    response.status(200).send({channel: ret});
+  } catch (error) {
+    response.status(500).send(error);
   }
 });
 
 app.post('/push', function (request, response) {
   var channel = request.body.channel;
   var message = request.body.message;
-  var ret = router.push(channel, message);
-  if (ret.error == undefined) {
-    response.status(200).send(ret);
-  } else {
-    response.status(500).send(ret);
+  try {
+    var ret = router.push(channel, message);
+    response.status(200).send({channel: ret});
+  } catch (error) {
+    response.status(500).send(error);
   }
 });
 
 app.post('/fetch', function (request, response) {
   var channel = request.body.channel;
-  var ret = router.fetch(channel);
-  if (ret.error == undefined) {
-    response.status(200).send(ret);
-  } else {
-    response.status(500).send(ret);
+  try {
+    var ret = router.fetch(channel);
+    response.status(200).send({message: ret});
+  } catch (error) {
+    response.status(500).send(error);
   }
 });
 
