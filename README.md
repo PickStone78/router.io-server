@@ -1,20 +1,25 @@
 ### 介绍
 基于发布/订阅机制实现了一个消息交换平台，该平台使用http协议进行数据交换。使用该平台，用户可以轻松的搭建消息通信管道，为用户建立分布式平台提供便利。
 
+### 使用
+
+    npm install
+    node index.js
+
 ### 服务
-* publish
+* publish (exchange) -> channel
 
-为用户提供建立发布管道的服务。
+提供数据通信管道的发布服务。
 
-* subscribe
+* subscribe (exchange) -> channel
 
-为用户提供建立订阅管道的服务。
+提供数据通信管道的订阅服务。
 
-* push
+* push (channel, message) -> channel
 
-为用户提供通过发布管道推送消息的服务。
+提供数据通信管道的数据推送服务。
 
-* fetch
+* fetch (channel) -> message
 
-为用户提供通过订阅管道接收消息的服务。
+提供数据通信管道的数据接收服务。
 
