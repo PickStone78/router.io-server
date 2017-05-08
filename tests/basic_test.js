@@ -1,5 +1,7 @@
+"use strict";
+
 const assert = require('assert');
-const router = require('../../router.io-server');
+const router = require('../../router.io.server');
 
 var exchange = 'test1';
 var pubChannel = router.publish(exchange);

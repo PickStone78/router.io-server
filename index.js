@@ -1,7 +1,9 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var router = require('./lib/router.js');
+"use strict";
+
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const router = require('./lib/router.js');
 
 app.use(bodyParser.json()); 
 app.use(express.static('./public'));
