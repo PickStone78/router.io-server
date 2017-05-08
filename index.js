@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var router = require('./lib/router.js');
 
 app.use(bodyParser.json()); 
-app.use(express.static('public'));
+app.use(express.static('./public'));
 
 app.post('/publish', function (request, response) {
   var exchange = request.body.exchange;
