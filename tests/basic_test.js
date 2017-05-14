@@ -5,35 +5,36 @@ const router = require('../../router.io.server');
 
 var exchange = 'test1';
 var pubChannel = router.publish(exchange);
-
-exchange = 'test2';
-assert.throws(
-  () => {
-    router.subscribe(exchange);
-  });
-
-exchange = 'test1';
 var subChannel = router.subscribe(exchange);
-
-var channel = 'test3';
-var message = 'hello';
-assert.throws(
-  () => {
-    router.push(channel, message);
-  });
-
-router.push(pubChannel, message);
-
-channel = 'test4';
-assert.throws(
-  () => {
-    router.fetch(channel);
-  });
-
+router.push(pubChannel, 'hello');
 var ret = router.fetch(subChannel);
-assert.equal(message, ret);
+assert.equal('hello', ret);
 
+assert.throws(
+  () => {
+    router.publish(exchange);
+  });
+
+router.close(pubChannel);
+assert.throws(
+  () => {
+    router.push(pubChannel, 'world');
+  });
 assert.throws(
   () => {
     router.fetch(subChannel);
   });
+
+pubChannel = router.publish(exchange);
+var subChannel1 = router.subscribe(exchange);
+var subChannel2 = router.subscribe(exchange);
+router.push(pubChannel, 'hello');
+router.push(pubChannel, 'world');
+ret = router.fetch(subChannel1);
+assert.equal('hello', ret);
+ret = router.fetch(subChannel2);
+assert.equal('hello', ret);
+ret = router.fetch(subChannel2);
+assert.equal('world', ret);
+ret = router.fetch(subChannel1);
+assert.equal('world', ret);
